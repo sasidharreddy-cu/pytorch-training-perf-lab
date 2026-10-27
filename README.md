@@ -18,8 +18,6 @@ Measured experiments on making PyTorch training and inference faster on NVIDIA G
 
 ## 00 · GPU performance from first principles
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sasidharreddy-cu/pytorch-training-perf-lab/blob/main/00_brrr_first_principles/brrr_first_principles.ipynb)
-
 This experiment reproduces the ideas in Horace He's [*Making Deep Learning Go Brrrr From First Principles*](https://horace.io/brrr_intro.html) with my own measurements. A GPU workload is limited by one of three things: **compute** (math), **memory bandwidth** (moving data), or **overhead** (Python, PyTorch and kernel launches). Each needs a different fix.
 
 [Notebook](00_brrr_first_principles/brrr_first_principles.ipynb) · [Raw results (JSON)](00_brrr_first_principles/brrr_results.json)
@@ -40,8 +38,6 @@ This experiment reproduces the ideas in Horace He's [*Making Deep Learning Go Br
 | CUDA Graphs (20-layer MLP, batch 16, 40 kernels) | Eager **1,103 µs** → torch.compile 1,029 µs → CUDA Graph **161 µs** (**6.9×**) |
 | Matmul, fp32 vs fp16 Tensor Cores | **3.8** vs **20.5** TFLOPS (**5.4×**) |
 | BERT-base MLP block (4,096 tokens, fp16) | Eager **2.96 ms** (8 kernels) → compiled **2.58 ms** (5 kernels), 1.15× |
-
-![Runtime stays flat while memory-bound, then rises once compute-bound](00_brrr_first_principles/memory_vs_compute.png)
 
 ### What I learned
 
